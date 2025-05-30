@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { MessageModule } from 'primeng/message';
 
 import { AuthService, AuthResponse } from '@/services/auth.service';
 import { ToastService } from '@/services/toast.service';
@@ -24,6 +25,7 @@ import { ToastService } from '@/services/toast.service';
     CommonModule,
     ButtonModule,
     InputTextModule,
+    MessageModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
