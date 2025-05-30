@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, Event, NavigationEnd, RouterOutlet } from '@angular/router';
-
-declare global {
-  interface Window {
-    HSStaticMethods: any;
-  }
-}
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +9,4 @@ declare global {
 })
 export class AppComponent {
   title = 'casango';
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationEnd) {
-        setTimeout(() => window.HSStaticMethods.autoInit(), 100);
-      }
-    });
-  }
 }
