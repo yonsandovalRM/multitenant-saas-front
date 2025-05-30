@@ -9,31 +9,37 @@ import { RegisterComponent } from './components/register/register.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
-    path: 'home',
     component: HomeComponent,
+    pathMatch: 'full',
+    title: 'Home',
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'pricing',
-    component: PricingComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
+    loadComponent: () =>
+      import('./components/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
+    title: 'Dashboard',
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    loadComponent: () =>
+      import('./components/register/register.component').then(
+        (m) => m.RegisterComponent
+      ),
+    title: 'Register',
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./components/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
+    title: 'Login',
   },
   {
     path: '**',
     component: NotFoundComponent,
+    title: 'Not Found',
   },
 ];

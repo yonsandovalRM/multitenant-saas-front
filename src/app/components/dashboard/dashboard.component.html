@@ -1,1 +1,6 @@
-<div>dashboard</div>
+@if (user){
+<h2>Dashboard</h2>
+<p>Nombre: {{ user.name }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Perfil: {{ user.role }}</p>
+}
