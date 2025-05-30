@@ -22,7 +22,7 @@
       "@/services/*": ["app/services/*"],
       "@/pages/*": ["app/pages/*"],
       "@/components/*": ["app/components/*"],
-      "@/models/*": ["app/models/*"]
+      "@/core/*": ["app/core/*"]
     }
   },
   "angularCompilerOptions": {
