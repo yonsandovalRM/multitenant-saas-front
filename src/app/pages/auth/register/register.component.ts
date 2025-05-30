@@ -93,23 +93,7 @@ export class RegisterComponent {
           }, 2000);
         },
         error: (err) => {
-          console.error('Registration error:', err);
           this.isLoading = false;
-
-          // Manejo específico de errores
-          if (err.status === 400) {
-            this.errorMessage =
-              'Datos inválidos. Verifica la información ingresada.';
-          } else if (err.status === 409) {
-            this.errorMessage =
-              'Este email ya está registrado. Intenta con otro email.';
-          } else if (err.status === 422) {
-            this.errorMessage =
-              'Error de validación. Verifica que todos los campos sean correctos.';
-          } else {
-            this.errorMessage =
-              'Error al registrarse. Intenta de nuevo más tarde.';
-          }
         },
       });
     } else {

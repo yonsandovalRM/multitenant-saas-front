@@ -75,26 +75,8 @@ export class LoginComponent implements OnInit {
         },
         error: (err) => {
           this.isLoading = false;
-
-          // Manejo específico de errores
-          if (err.status === 401) {
-            this.toastService.showToast(
-              'error',
-              'Credenciales incorrectas',
-              'Verifica tu email y contraseña.'
-            );
-          } else if (err.status === 403) {
-            this.toastService.showToast(
-              'error',
-              'Acceso denegado',
-              'Tu cuenta puede estar deshabilitada.'
-            );
-          } else {
-            this.toastService.showToast(
-              'error',
-              'Error al iniciar sesión',
-              'Verifica tu conexión e intenta de nuevo.'
-            );
+          if (err.error.message) {
+            this.errorMessage = err.error.message;
           }
         },
       });

@@ -33,19 +33,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      // Manejo específico de errores 401 (No autorizado)
-      if (error.status === 401 && error.message === 'JWT_EXPIRED') {
-        console.warn('Token expirado o inválido. Cerrando sesión...');
-
-        // Cerrar sesión y limpiar datos
-        authService.logout();
-
-        // Redirigir al login
-        router.navigate(['/auth/login'], {
-          queryParams: { expired: 'true' },
-        });
-      }
-
       // Re-lanzar el error para que otros componentes puedan manejarlo si es necesario
       return throwError(() => error);
     })
