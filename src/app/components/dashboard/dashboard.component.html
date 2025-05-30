@@ -1,6 +1,21 @@
-@if (user){
-<h2>Dashboard</h2>
-<p>Nombre: {{ user.name }}</p>
-<p>Email: {{ user.email }}</p>
-<p>Perfil: {{ user.role }}</p>
+@if (user) {
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h2>Dashboard</h2>
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </header>
+
+  <div class="user-info">
+    <div class="info-card">
+      <h3>Información del Usuario</h3>
+      <p><strong>Nombre:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Perfil:</strong> {{ user.role }}</p>
+    </div>
+  </div>
+</div>
+} @else {
+<div class="loading">
+  <p>Cargando información del usuario...</p>
+</div>
 }

@@ -7,16 +7,20 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../helpers/services/auth.service';
+import { AuthService, AuthResponse } from '../../helpers/services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule, ReactiveFormsModule],
+  imports: [FormsModule, RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  isLoading = false;
+  errorMessage = '';
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
@@ -30,13 +34,22 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
+      this.isLoading = true;
+      this.errorMessage = '';
+
       const { email, password } = this.loginForm.value;
+
       this.authService.login(email, password).subscribe({
-        next: (res) => {
+        next: (response: AuthResponse) => {
+          console.log('Login successful:', response);
+          this.isLoading = false;
           this.router.navigateByUrl('/dashboard');
         },
         error: (err) => {
-          console.error(err);
+          console.error('Login error:', err);
+          this.isLoading = false;
+          this.errorMessage =
+            'Error al iniciar sesión. Verifica tus credenciales.';
         },
       });
     }
