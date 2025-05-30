@@ -42,7 +42,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.logout();
-    // Aquí podrías redirigir al login
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/auth/login');
   }
 }

@@ -74,8 +74,6 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/dashboard');
         },
         error: (err) => {
-          console.error('Login error:', err);
-
           this.isLoading = false;
 
           // Manejo específico de errores
