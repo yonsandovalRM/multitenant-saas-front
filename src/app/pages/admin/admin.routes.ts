@@ -4,9 +4,22 @@ export const ADMIN_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
-      ),
-    title: 'Dashboard',
+      import('./layout/layout.component').then((m) => m.LayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
+        title: 'Dashboard',
+      },
+      {
+        path: 'users',
+        loadComponent: () =>
+          import('./users/users.component').then((m) => m.UsersComponent),
+        title: 'Users',
+      },
+    ],
   },
 ];
