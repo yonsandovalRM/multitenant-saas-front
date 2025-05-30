@@ -1,42 +1,25 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { PricingComponent } from './pages/pricing/pricing.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { authGuard } from './helpers/guards/auth-guard';
+import { NotFoundComponent } from '@/pages/shared/not-found/not-found.component';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    pathMatch: 'full',
-    title: 'Home',
+    loadChildren: () =>
+      import('./pages/shared/shared.routes').then((m) => m.SHARED_ROUTES),
   },
   {
     path: 'dashboard',
-    loadComponent: () =>
-      import('./pages/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
-      ),
-    title: 'Dashboard',
+    loadChildren: () =>
+      import('./pages/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
     canActivate: [authGuard],
   },
   {
-    path: 'register',
-    loadComponent: () =>
-      import('./pages/register/register.component').then(
-        (m) => m.RegisterComponent
-      ),
-    title: 'Register',
+    path: 'auth',
+    loadChildren: () =>
+      import('./pages/auth/auth.routes').then((m) => m.AUTH_ROUTES),
   },
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('./pages/login/login.component').then((m) => m.LoginComponent),
-    title: 'Login',
-  },
+
   {
     path: '**',
     component: NotFoundComponent,

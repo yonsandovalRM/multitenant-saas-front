@@ -7,11 +7,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { AuthService, AuthResponse } from '../../helpers/services/auth.service';
 import { CommonModule } from '@angular/common';
+
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { ToastService } from '../../helpers/services/toast.service';
+
+import { AuthService, AuthResponse } from '@/services/auth.service';
+import { ToastService } from '@/services/toast.service';
 
 @Component({
   selector: 'app-login',

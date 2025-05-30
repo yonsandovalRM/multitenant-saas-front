@@ -10,10 +10,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService, AuthResponse } from '../../helpers/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+
+import { AuthService, AuthResponse } from '@/services/auth.service';
+import { ToastService } from '@/services/toast.service';
 
 // Validador personalizado para confirmar contraseña
 export const passwordMatchValidator: ValidatorFn = (
@@ -53,7 +55,8 @@ export class RegisterComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly toastService: ToastService
   ) {
     this.registerForm = this.fb.group(
       {
@@ -76,7 +79,11 @@ export class RegisterComponent {
 
       this.authService.register(name, email, password).subscribe({
         next: (response: AuthResponse) => {
-          console.log('Registration successful:', response);
+          this.toastService.showToast(
+            'success',
+            'Registro exitoso',
+            'Inicia sesión para continuar'
+          );
           this.isLoading = false;
           this.successMessage = 'Registro exitoso. Redirigiendo...';
 
