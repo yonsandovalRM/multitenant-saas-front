@@ -9,10 +9,20 @@ import {
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService, AuthResponse } from '../../helpers/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastService } from '../../helpers/services/toast.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule,
+    ButtonModule,
+    InputTextModule,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -25,7 +35,8 @@ export class LoginComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly toastService: ToastService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -52,27 +63,38 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(email, password).subscribe({
         next: (response: AuthResponse) => {
-          console.log('Login successful:', response);
+          this.toastService.showToast(
+            'success',
+            'Inicio de sesión exitoso',
+            'Bienvenido nuevamente, ' + response.user.name
+          );
           this.isLoading = false;
           this.router.navigateByUrl('/dashboard');
         },
         error: (err) => {
           console.error('Login error:', err);
+
           this.isLoading = false;
 
           // Manejo específico de errores
           if (err.status === 401) {
-            this.errorMessage =
-              'Credenciales incorrectas. Verifica tu email y contraseña.';
+            this.toastService.showToast(
+              'error',
+              'Credenciales incorrectas',
+              'Verifica tu email y contraseña.'
+            );
           } else if (err.status === 403) {
-            this.errorMessage =
-              'Acceso denegado. Tu cuenta puede estar deshabilitada.';
-          } else if (err.status === 429) {
-            this.errorMessage =
-              'Demasiados intentos. Intenta de nuevo más tarde.';
+            this.toastService.showToast(
+              'error',
+              'Acceso denegado',
+              'Tu cuenta puede estar deshabilitada.'
+            );
           } else {
-            this.errorMessage =
-              'Error al iniciar sesión. Verifica tu conexión e intenta de nuevo.';
+            this.toastService.showToast(
+              'error',
+              'Error al iniciar sesión',
+              'Verifica tu conexión e intenta de nuevo.'
+            );
           }
         },
       });

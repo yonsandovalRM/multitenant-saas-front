@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { PricingComponent } from './components/pricing/pricing.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { PricingComponent } from './pages/pricing/pricing.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { authGuard } from './helpers/guards/auth-guard';
 
 export const routes: Routes = [
@@ -17,7 +17,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () =>
-      import('./components/dashboard/dashboard.component').then(
+      import('./pages/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent
       ),
     title: 'Dashboard',
@@ -26,7 +26,7 @@ export const routes: Routes = [
   {
     path: 'register',
     loadComponent: () =>
-      import('./components/register/register.component').then(
+      import('./pages/register/register.component').then(
         (m) => m.RegisterComponent
       ),
     title: 'Register',
@@ -34,9 +34,7 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./components/login/login.component').then(
-        (m) => m.LoginComponent
-      ),
+      import('./pages/login/login.component').then((m) => m.LoginComponent),
     title: 'Login',
   },
   {
