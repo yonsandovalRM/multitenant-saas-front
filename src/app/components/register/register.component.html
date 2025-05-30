@@ -15,6 +15,7 @@
     <div class="form-group">
       <label for="name">Nombre</label>
       <input
+        pInputText
         type="text"
         id="name"
         formControlName="name"
@@ -35,6 +36,7 @@
     <div class="form-group">
       <label for="email">Email</label>
       <input
+        pInputText
         type="email"
         id="email"
         formControlName="email"
@@ -56,6 +58,7 @@
     <div class="form-group">
       <label for="password">Contraseña</label>
       <input
+        pInputText
         type="password"
         id="password"
         formControlName="password"
@@ -96,13 +99,13 @@
       }
     </div>
 
-    <button
+    <p-button
       type="submit"
-      [disabled]="!registerForm.valid || isLoading"
-      class="submit-btn"
-    >
-      @if (isLoading) { Registrando... } @else { Registrarse }
-    </button>
+      [label]="isLoading ? 'Cargando...' : 'Registrarme'"
+      icon="pi pi-check"
+      [disabled]="!registerForm.valid"
+      [loading]="isLoading"
+    />
   </form>
 
   <div class="login-link">

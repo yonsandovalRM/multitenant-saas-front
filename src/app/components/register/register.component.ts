@@ -12,6 +12,8 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, AuthResponse } from '../../helpers/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 // Validador personalizado para confirmar contraseña
 export const passwordMatchValidator: ValidatorFn = (
@@ -31,7 +33,14 @@ export const passwordMatchValidator: ValidatorFn = (
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule,
+    ButtonModule,
+    InputTextModule,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
