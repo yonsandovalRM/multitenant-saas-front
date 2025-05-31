@@ -78,6 +78,9 @@ export class RegisterComponent {
         },
         error: (err) => {
           this.isLoading = false;
+          if (err.error.message) {
+            this.errorMessage = err.error.message;
+          }
         },
       });
     } else {

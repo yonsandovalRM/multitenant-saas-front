@@ -1,6 +1,6 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
-  <div class="flex justify-center items-center h-screen">
-    <div class="card bg-base-200 w-96 shadow-sm p-6">
+  <div class="flex justify-center items-center min-h-screen">
+    <div class="card bg-base-100 w-96 shadow-sm p-4">
       <div class="card-body">
         <div class="flex flex-col gap-2">
           <h1 class="card-title text-2xl font-bold mb-4">
@@ -21,6 +21,8 @@
           </div>
           <div class="divider">O</div>
           <!-- Iniciar con email y contraseña -->
+
+          <!-- email -->
           <div class="flex flex-col">
             <label for="email">Correo electrónico</label>
             <input
@@ -31,17 +33,22 @@
                 loginForm.get('email')?.invalid &&
                 loginForm.get('email')?.touched
               "
-              class="input validator"
+              class="input"
               required
             />
-            <p class="validator-hint">
-              @if (loginForm.get("email")?.errors?.["required"]) {
-                El email es requerido
-              }
-              @if (loginForm.get("email")?.errors?.["email"]) {
-                Ingresa un email válido
-              }
-            </p>
+
+            @if (
+              loginForm.get("email")?.errors && loginForm.get("email")?.touched
+            ) {
+              <p class="dark:text-red-400 text-red-500 text-xs">
+                @if (loginForm.get("email")?.errors?.["required"]) {
+                  El email es requerido
+                }
+                @if (loginForm.get("email")?.errors?.["email"]) {
+                  Ingresa un email válido
+                }
+              </p>
+            }
           </div>
           <div class="flex flex-col">
             <label for="password">Contraseña</label>
@@ -54,17 +61,23 @@
                 loginForm.get('password')?.invalid &&
                 loginForm.get('password')?.touched
               "
-              class="input validator"
+              class="input"
               required
             />
-            <p class="validator-hint">
-              @if (loginForm.get("password")?.errors?.["required"]) {
-                La contraseña es requerida
-              }
-              @if (loginForm.get("password")?.errors?.["minlength"]) {
-                La contraseña debe tener al menos 6 caracteres
-              }
-            </p>
+
+            @if (
+              loginForm.get("password")?.errors &&
+              loginForm.get("password")?.touched
+            ) {
+              <p class="dark:text-red-400 text-red-500 text-xs">
+                @if (loginForm.get("password")?.errors?.["required"]) {
+                  La contraseña es requerida
+                }
+                @if (loginForm.get("password")?.errors?.["minlength"]) {
+                  La contraseña debe tener al menos 6 caracteres
+                }
+              </p>
+            }
           </div>
           <div class="flex justify-between items-center gap-3">
             <div class="flex items-center gap-2">
@@ -76,7 +89,7 @@
             </a>
           </div>
         </div>
-        <button class="btn btn-primary w-full mb-4 mt-6">
+        <button type="submit" class="btn btn-primary w-full mb-4 mt-6">
           {{ isLoading ? "Cargando..." : "Iniciar Sesión" }}
         </button>
         <div class="flex justify-center items-center gap-2">
