@@ -33,8 +33,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      // Re-lanzar el error para que otros componentes puedan manejarlo si es necesario
+      if (error.status === 0) {
+        // TODO: Mostrar un mensaje de error al usuario
+        console.log('Internet connection error');
+      }
       return throwError(() => error);
-    })
+    }),
   );
 };
