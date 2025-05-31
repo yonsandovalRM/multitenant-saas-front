@@ -21,13 +21,14 @@
         </svg>
       </div>
       @if (errorMessage) {
-      <div class="error-message">
-        {{ errorMessage }}
-      </div>
-      } @if (successMessage) {
-      <div class="success-message">
-        {{ successMessage }}
-      </div>
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+      }
+      @if (successMessage) {
+        <div class="success-message">
+          {{ successMessage }}
+        </div>
       }
       <div class="flex flex-col items-center gap-2 w-full">
         <div
@@ -67,13 +68,18 @@
             "
             class="w-full px-3 py-2 shadow-sm rounded-lg"
           />
-          @if (registerForm.get('name')?.invalid &&
-          registerForm.get('name')?.touched) {
-          <div class="field-error">
-            @if (registerForm.get('name')?.errors?.['required']) { El nombre es
-            requerido } @if (registerForm.get('name')?.errors?.['minlength']) {
-            El nombre debe tener al menos 2 caracteres }
-          </div>
+          @if (
+            registerForm.get("name")?.invalid &&
+            registerForm.get("name")?.touched
+          ) {
+            <div class="field-error">
+              @if (registerForm.get("name")?.errors?.["required"]) {
+                El nombre es requerido
+              }
+              @if (registerForm.get("name")?.errors?.["minlength"]) {
+                El nombre debe tener al menos 2 caracteres
+              }
+            </div>
           }
         </div>
         <div class="flex flex-col gap-2 w-full">
@@ -94,13 +100,18 @@
             "
             class="w-full px-3 py-2 shadow-sm rounded-lg"
           />
-          @if (registerForm.get('email')?.invalid &&
-          registerForm.get('email')?.touched) {
-          <div class="field-error">
-            @if (registerForm.get('email')?.errors?.['required']) { El email es
-            requerido } @if (registerForm.get('email')?.errors?.['email']) {
-            Ingresa un email válido }
-          </div>
+          @if (
+            registerForm.get("email")?.invalid &&
+            registerForm.get("email")?.touched
+          ) {
+            <div class="field-error">
+              @if (registerForm.get("email")?.errors?.["required"]) {
+                El email es requerido
+              }
+              @if (registerForm.get("email")?.errors?.["email"]) {
+                Ingresa un email válido
+              }
+            </div>
           }
         </div>
         <div class="flex flex-col gap-2 w-full">
@@ -120,14 +131,18 @@
             "
             class="w-full px-3 py-2 shadow-sm rounded-lg"
           />
-          @if (registerForm.get('password')?.invalid &&
-          registerForm.get('password')?.touched) {
-          <div class="field-error">
-            @if (registerForm.get('password')?.errors?.['required']) { La
-            contraseña es requerida } @if
-            (registerForm.get('password')?.errors?.['minlength']) { La
-            contraseña debe tener al menos 6 caracteres }
-          </div>
+          @if (
+            registerForm.get("password")?.invalid &&
+            registerForm.get("password")?.touched
+          ) {
+            <div class="field-error">
+              @if (registerForm.get("password")?.errors?.["required"]) {
+                La contraseña es requerida
+              }
+              @if (registerForm.get("password")?.errors?.["minlength"]) {
+                La contraseña debe tener al menos 6 caracteres
+              }
+            </div>
           }
         </div>
         <div class="flex flex-col gap-2 w-full">
@@ -147,14 +162,22 @@
             "
             class="w-full px-3 py-2 shadow-sm rounded-lg"
           />
-          @if (registerForm.get('confirmPassword')?.invalid &&
-          registerForm.get('confirmPassword')?.touched) {
-          <div class="field-error">
-            @if (registerForm.get('confirmPassword')?.errors?.['required']) {
-            Confirma tu contraseña } @if
-            (registerForm.get('confirmPassword')?.errors?.['passwordMismatch'])
-            { Las contraseñas no coinciden }
-          </div>
+          @if (
+            registerForm.get("confirmPassword")?.invalid &&
+            registerForm.get("confirmPassword")?.touched
+          ) {
+            <div class="field-error">
+              @if (registerForm.get("confirmPassword")?.errors?.["required"]) {
+                Confirma tu contraseña
+              }
+              @if (
+                registerForm.get("confirmPassword")?.errors?.[
+                  "passwordMismatch"
+                ]
+              ) {
+                Las contraseñas no coinciden
+              }
+            </div>
           }
         </div>
         <div
@@ -173,14 +196,12 @@
             >Forgot your password?</a
           >
         </div>
-        <p-button
+        <button
           type="submit"
-          [label]="isLoading ? 'Cargando...' : 'Registrarme'"
-          icon="pi pi-check"
-          [disabled]="!registerForm.valid"
-          [loading]="isLoading"
-          styleClass="w-full py-2 rounded-lg flex justify-center items-center gap-2"
-        />
+          class="w-full py-2 rounded-lg flex justify-center items-center gap-2"
+        >
+          {{ isLoading ? "Cargando..." : "Registrarme" }}
+        </button>
       </div>
     </form>
   </div>

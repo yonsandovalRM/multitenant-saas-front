@@ -9,24 +9,11 @@ import {
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { MessageModule } from 'primeng/message';
-
 import { AuthService, AuthResponse } from '@/services/auth.service';
-import { ToastService } from '@/services/toast.service';
 
 @Component({
   selector: 'app-login',
-  imports: [
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    CommonModule,
-    ButtonModule,
-    InputTextModule,
-    MessageModule,
-  ],
+  imports: [FormsModule, RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -40,7 +27,6 @@ export class LoginComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly toastService: ToastService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -67,11 +53,6 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(email, password).subscribe({
         next: (response: AuthResponse) => {
-          this.toastService.showToast(
-            'success',
-            'Inicio de sesión exitoso',
-            'Bienvenido nuevamente, ' + response.user.name
-          );
           this.isLoading = false;
           this.router.navigateByUrl('/dashboard');
         },

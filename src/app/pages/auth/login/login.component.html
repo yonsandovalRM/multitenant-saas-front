@@ -1,5 +1,5 @@
 @if (errorMessage) {
-  <p-message severity="error">{{ errorMessage }}</p-message>
+  <div>{{ errorMessage }}</div>
 }
 
 <form [formGroup]="loginForm" (ngSubmit)="login()">
@@ -23,14 +23,14 @@
         class="w-full px-3 py-2 shadow-sm rounded-lg"
       />
       @if (loginForm.get("email")?.invalid && loginForm.get("email")?.touched) {
-        <p-message severity="error" variant="simple" size="small">
+        <div>
           @if (loginForm.get("email")?.errors?.["required"]) {
             El email es requerido
           }
           @if (loginForm.get("email")?.errors?.["email"]) {
             Ingresa un email válido
           }
-        </p-message>
+        </div>
       }
     </div>
     <div class="flex flex-col gap-2 w-full">
@@ -54,14 +54,14 @@
       @if (
         loginForm.get("password")?.invalid && loginForm.get("password")?.touched
       ) {
-        <p-message severity="error" variant="simple" size="small">
+        <div>
           @if (loginForm.get("password")?.errors?.["required"]) {
             La contraseña es requerida
           }
           @if (loginForm.get("password")?.errors?.["minlength"]) {
             La contraseña debe tener al menos 6 caracteres
           }
-        </p-message>
+        </div>
       }
     </div>
 
@@ -81,14 +81,12 @@
         >Forgot your password?</a
       >
     </div>
-    <p-button
+    <button
       type="submit"
-      [label]="isLoading ? 'Cargando...' : 'Iniciar Sesión'"
-      icon="pi pi-check"
-      [disabled]="!loginForm.valid"
-      [loading]="isLoading"
-      styleClass="w-full py-2 rounded-lg flex justify-center items-center gap-2"
-    />
+      class="w-full py-2 rounded-lg flex justify-center items-center gap-2"
+    >
+      {{ isLoading ? "Cargando..." : "Iniciar Sesión" }}
+    </button>
   </div>
   <div class="text-center w-full">
     <span class="text-surface-700 dark:text-surface-200 leading-normal"

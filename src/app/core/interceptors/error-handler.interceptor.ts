@@ -3,11 +3,9 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { ToastService } from '@/services/toast.service';
 
 export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
-  const toastService = inject(ToastService);
 
   return next(req).pipe(
     retry(1), // Reintenta la petición una vez antes de fallar
@@ -22,7 +20,7 @@ export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
         // Error del lado del servidor
         errorMessage = `Código de error: ${error.status}\nMensaje: ${error.message}`;
         console.error(
-          `Código de error: ${error.status}, Mensaje: ${error.message}`
+          `Código de error: ${error.status}, Mensaje: ${error.message}`,
         );
 
         // Manejo específico según el código de estado
@@ -30,10 +28,10 @@ export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       // Mostrar notificación al usuario
-      showErrorMessage(toastService, errorMessage, error.status);
+      showErrorMessage(errorMessage, error.status);
 
       return throwError(() => error);
-    })
+    }),
   );
 };
 
@@ -42,7 +40,7 @@ function handleServerError(error: HttpErrorResponse, router: Router): void {
     case 400:
       console.error(
         'Solicitud incorrecta (400):',
-        error.error?.message || 'Datos inválidos'
+        error.error?.message || 'Datos inválidos',
       );
       break;
 
@@ -71,7 +69,7 @@ function handleServerError(error: HttpErrorResponse, router: Router): void {
     case 422:
       console.error(
         'Datos no procesables (422):',
-        error.error?.errors || error.error?.message
+        error.error?.errors || error.error?.message,
       );
       break;
 
@@ -101,11 +99,7 @@ function handleServerError(error: HttpErrorResponse, router: Router): void {
   }
 }
 
-function showErrorMessage(
-  toastService: ToastService,
-  message: string,
-  statusCode?: number
-): void {
+function showErrorMessage(message: string, statusCode?: number): void {
   // Mensaje personalizado según el código de error
   let userMessage = '';
 
@@ -152,5 +146,4 @@ function showErrorMessage(
 
   // Log para desarrollo
   console.warn('Mensaje para el usuario:', userMessage);
-  toastService.showToast('error', 'Error', userMessage);
 }

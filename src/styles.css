@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "tailwindcss-primeui";
 
 html{
 font-family: "Inter", sans-serif;

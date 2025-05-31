@@ -11,15 +11,12 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 
 import { AuthService, AuthResponse } from '@/services/auth.service';
-import { ToastService } from '@/services/toast.service';
 
 // Validador personalizado para confirmar contraseña
 export const passwordMatchValidator: ValidatorFn = (
-  control: AbstractControl
+  control: AbstractControl,
 ): ValidationErrors | null => {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
@@ -35,14 +32,7 @@ export const passwordMatchValidator: ValidatorFn = (
 
 @Component({
   selector: 'app-register',
-  imports: [
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    CommonModule,
-    ButtonModule,
-    InputTextModule,
-  ],
+  imports: [FormsModule, RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -56,7 +46,6 @@ export class RegisterComponent {
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly toastService: ToastService
   ) {
     this.registerForm = this.fb.group(
       {
@@ -65,7 +54,7 @@ export class RegisterComponent {
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
       },
-      { validators: passwordMatchValidator }
+      { validators: passwordMatchValidator },
     );
   }
 
@@ -79,11 +68,6 @@ export class RegisterComponent {
 
       this.authService.register(name, email, password).subscribe({
         next: (response: AuthResponse) => {
-          this.toastService.showToast(
-            'success',
-            'Registro exitoso',
-            'Inicia sesión para continuar'
-          );
           this.isLoading = false;
           this.successMessage = 'Registro exitoso. Redirigiendo...';
 
