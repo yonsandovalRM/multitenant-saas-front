@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { User } from '@/core/models/user';
 import { AuthService } from '@/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   user: User | null = null;
   private userSubscription: Subscription = new Subscription();
 
-  constructor(private authService: AuthService, private router: Router) {}
+  authService = inject(AuthService);
+  router = inject(Router);
 
   ngOnInit() {
     // Suscribirse al observable del usuario

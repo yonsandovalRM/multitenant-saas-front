@@ -1,21 +1,20 @@
 @if (user) {
-<div>
-  <header>
-    <h2>Dashboard</h2>
-    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
-  </header>
-
   <div>
+    <header>
+      <h2>Dashboard</h2>
+    </header>
+
     <div>
-      <h3>Información del Usuario</h3>
-      <p><strong>Nombre:</strong> {{ user.name }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Perfil:</strong> {{ user.role }}</p>
+      <div>
+        <h3>Información del Usuario</h3>
+        <p><strong>Nombre:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Perfil:</strong> {{ user.role }}</p>
+      </div>
     </div>
   </div>
-</div>
 } @else {
-<div>
-  <p>Cargando información del usuario...</p>
-</div>
+  <div>
+    <p>Cargando información del usuario...</p>
+  </div>
 }

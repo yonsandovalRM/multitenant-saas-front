@@ -10,9 +10,15 @@ export const ADMIN_ROUTES: Routes = [
         path: '',
         loadComponent: () =>
           import('./dashboard/dashboard.component').then(
-            (m) => m.DashboardComponent
+            (m) => m.DashboardComponent,
           ),
         title: 'Dashboard',
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./profile/profile.component').then((m) => m.ProfileComponent),
+        title: 'Profile',
       },
       {
         path: 'users',
