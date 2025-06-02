@@ -1,11 +1,10 @@
+import { HeroSectionComponent } from '@/components/home/hero-section/hero-section.component';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [HeroSectionComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

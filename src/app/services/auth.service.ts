@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '@/core/models/user';
@@ -45,14 +45,14 @@ export class AuthService {
       .pipe(
         tap((response) => {
           this.handleAuthSuccess(response);
-        })
+        }),
       );
   }
 
   register(
     name: string,
     email: string,
-    password: string
+    password: string,
   ): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>(`${this.apiUrl}/core/auth/register/core`, {
@@ -63,7 +63,7 @@ export class AuthService {
       .pipe(
         tap((response) => {
           this.handleAuthSuccess(response);
-        })
+        }),
       );
   }
 
