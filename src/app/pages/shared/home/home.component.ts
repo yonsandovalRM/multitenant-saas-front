@@ -4,7 +4,7 @@ import {
   FeaturesSectionComponent,
   FooterSectionComponent,
   HeroSectionComponent,
-  PricesSectionComponent,
+  PricingSectionComponent,
   StatsSectionComponent,
 } from './components';
 
@@ -15,7 +15,7 @@ import {
     FeaturesSectionComponent,
     FooterSectionComponent,
     CtaSectionComponent,
-    PricesSectionComponent,
+    PricingSectionComponent,
     StatsSectionComponent,
   ],
   templateUrl: './home.component.html',
