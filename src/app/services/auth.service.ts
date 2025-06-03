@@ -116,11 +116,11 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return localStorage.getItem(this.TOKEN_KEY) || null;
   }
 
   getTenantId(): string | null {
-    return localStorage.getItem(this.TENANT_KEY);
+    return localStorage.getItem(this.TENANT_KEY) || null;
   }
 
   getCurrentUser(): User | null {
