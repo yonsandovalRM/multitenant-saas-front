@@ -1,9 +1,12 @@
+import { Component } from '@angular/core';
 import {
+  CtaSectionComponent,
   FeaturesSectionComponent,
   FooterSectionComponent,
-} from '@/components/home';
-import { HeroSectionComponent } from '@/components/home/hero-section/hero-section.component';
-import { Component } from '@angular/core';
+  HeroSectionComponent,
+  PricesSectionComponent,
+  StatsSectionComponent,
+} from './components';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +14,9 @@ import { Component } from '@angular/core';
     HeroSectionComponent,
     FeaturesSectionComponent,
     FooterSectionComponent,
+    CtaSectionComponent,
+    PricesSectionComponent,
+    StatsSectionComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
