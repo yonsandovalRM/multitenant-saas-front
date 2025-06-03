@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { User } from '@/core/models/user';
 
 export interface AuthResponse {
@@ -76,7 +76,13 @@ export class AuthService {
     localStorage.setItem(this.TOKEN_KEY, response.accessToken);
 
     // Guardar tenant ID
-    localStorage.setItem(this.TENANT_KEY, response.user.tenantId);
+    if (response.user.tenantId) {
+      // Only store if it's a truthy value
+      localStorage.setItem(this.TENANT_KEY, response.user.tenantId);
+    } else {
+      // If tenantId is null, remove it from localStorage to avoid storing "null"
+      localStorage.removeItem(this.TENANT_KEY);
+    }
 
     // Crear objeto User y guardarlo
     const user: User = {

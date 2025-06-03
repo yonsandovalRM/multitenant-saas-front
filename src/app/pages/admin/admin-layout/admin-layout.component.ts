@@ -1,16 +1,19 @@
 import { AuthService } from '@/services/auth.service';
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-layout',
+  selector: 'app-admin-layout',
   imports: [RouterOutlet, RouterLink],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css',
+  templateUrl: './admin-layout.component.html',
 })
-export class LayoutComponent {
+export class AdminLayoutComponent {
   authService = inject(AuthService);
   router = inject(Router);
+
+  toggleSidebar() {
+    console.log('toggleSidebar');
+  }
 
   logout() {
     this.authService.logout();
