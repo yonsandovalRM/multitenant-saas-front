@@ -1,0 +1,20 @@
+<li>
+  <a
+    class="flex items-center gap-2 px-4 py-2 hover:bg-base-300 rounded transition-colors w-full"
+    [routerLink]="routerLink"
+    [routerLinkActive]="['bg-base-300']"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <span>{{ icon }}</span>
+    <span
+      class="overflow-hidden whitespace-nowrap transition-opacity duration-300"
+      [class.opacity-100]="isOpen"
+      [class.opacity-0]="!isOpen"
+      [class.w-0]="!isOpen"
+      [class.w-full]="isOpen"
+      [class.-ml-2]="!isOpen"
+    >
+      {{ label }}
+    </span>
+  </a>
+</li>
