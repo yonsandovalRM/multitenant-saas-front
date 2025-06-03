@@ -1,0 +1,21 @@
+.background-effect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -15rem;
+    z-index: -10;
+    transform: translateZ(0);
+    overflow: hidden;
+    filter: blur(64px); 
+  }
+    
+  .background-effect-inner {
+    position: relative;
+    left: calc(50%);
+    aspect-ratio: 1155/678;
+    width: 50rem;
+    transform: translateX(-50%) rotate(30deg);
+    background-image: linear-gradient(to top right, #80caff, #4f46e5);
+    opacity: 0.2;
+  }
+    

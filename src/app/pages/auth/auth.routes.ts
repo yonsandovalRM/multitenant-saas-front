@@ -4,7 +4,9 @@ export const AUTH_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./layout/layout.component').then((m) => m.LayoutComponent),
+      import('./auth-layout/auth-layout.component').then(
+        (m) => m.AuthLayoutComponent,
+      ),
     children: [
       {
         path: 'login',
@@ -16,7 +18,7 @@ export const AUTH_ROUTES: Routes = [
         path: 'register',
         loadComponent: () =>
           import('./register/register.component').then(
-            (m) => m.RegisterComponent
+            (m) => m.RegisterComponent,
           ),
         title: 'Register',
       },
